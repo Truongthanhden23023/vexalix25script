@@ -263,6 +263,7 @@ local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
 local function getLocalTime(offset)
     return os.date("!%Y-%m-%d %H:%M:%S", os.time() + offset * 3600)
 end
+local label15 = Tab:CreateLabel("Vietnam Time: " .. getLocalTime(7))
 
 local Toggle = Tab:CreateToggle({
    Name = "Screen UI",
@@ -275,7 +276,6 @@ local Toggle = Tab:CreateToggle({
    end,
 })
 
-local label15 = Tab:CreateLabel("Vietnam Time: " .. getLocalTime(7))
 
 local Button = Tab:CreateButton({
    Name = "Sound UI By: Vexalix25",
