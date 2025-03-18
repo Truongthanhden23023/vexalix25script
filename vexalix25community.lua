@@ -267,7 +267,7 @@ end
 local Toggle = Tab:CreateToggle({
    Name = "Screen UI",
    CurrentValue = false,
-   Flag = "Enable", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
    loadstring(game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/android-/refs/heads/main/editcondimemay"))()
    -- The function that takes place when the toggle is pressed
