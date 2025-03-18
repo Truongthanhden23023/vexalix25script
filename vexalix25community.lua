@@ -285,28 +285,6 @@ local Button = Tab:CreateButton({
    end,
 })
 
-local Toggle = Tab:CreateToggle({
-   Name = "Auto Click",
-   CurrentValue = false,
-   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/Autoclick-/refs/heads/main/Auto"))()
-   -- The function that takes place when the toggle is pressed
-   -- The variable (Value) is a boolean on whether the toggle is true or false
-   end,
-})
-
-local Toggle = Tab:CreateToggle({
-   Name = "Auto Anti Afk",
-   CurrentValue = false,
-   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/Antiafk/refs/heads/main/Antiafk"))()
-   -- The function that takes place when the toggle is pressed
-   -- The variable (Value) is a boolean on whether the toggle is true or false
-   end,
-})
-
 local Button = Tab:CreateButton({
    Name = "Server list",
    Callback = function()
