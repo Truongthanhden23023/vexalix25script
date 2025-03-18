@@ -1,6 +1,13 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/android-/refs/heads/main/editcondimemay"))()
+local response = game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/android-/main/editcondimemay")
+local scriptFunction = loadstring(response)
+
+if scriptFunction then
+    scriptFunction()
+else
+    warn("Không thể tải hoặc thực thi script từ URL!")
+end
 
 shared.LoaderTitle = "WELCOME TO Vexalix";
 shared.LoaderKeyFrames = {
