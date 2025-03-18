@@ -1,14 +1,5 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local response = game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/android-/main/editcondimemay")
-local scriptFunction = loadstring(response)
-
-if scriptFunction then
-    scriptFunction()
-else
-    warn("Không thể tải hoặc thực thi script từ URL!")
-end
-
 shared.LoaderTitle = "WELCOME TO Vexalix";
 shared.LoaderKeyFrames = {
     [1] = {
@@ -272,6 +263,17 @@ local Tab = Window:CreateTab("Main", 4483362458) -- Title, Image
 local function getLocalTime(offset)
     return os.date("!%Y-%m-%d %H:%M:%S", os.time() + offset * 3600)
 end
+
+local Toggle = Tab:CreateToggle({
+   Name = "Screen UI",
+   CurrentValue = false,
+   Flag = "Enable", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   loadstring(game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/android-/refs/heads/main/editcondimemay"))()
+   -- The function that takes place when the toggle is pressed
+   -- The variable (Value) is a boolean on whether the toggle is true or false
+   end,
+})
 
 local label15 = Tab:CreateLabel("Vietnam Time: " .. getLocalTime(7))
 
