@@ -1,5 +1,112 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Tạo ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+
+-- Tạo TextLabel
+local textLabel = Instance.new("TextLabel")
+textLabel.Parent = screenGui
+textLabel.Size = UDim2.new(0.5, 0, 0.1, 0) -- Kích thước
+textLabel.Position = UDim2.new(0.25, 0, 0.1, 0) -- Vị trí
+textLabel.Text = "Vexalix25 Community -https://discord.gg/U2YCa5Sh"
+textLabel.TextScaled = true
+textLabel.Font = Enum.Font.SourceSansBold
+textLabel.TextColor3 = Color3.fromRGB(255, 0, 0) -- Màu ban đầu
+textLabel.BackgroundTransparency = 1 -- Trong suốt
+
+-- Hàm đổi màu rainbow
+local function rainbowText()
+    local hue = 0
+    while task.wait(0.1) do -- Đổi màu mỗi 0.1 giây
+        hue = (hue + 10) % 360 -- Tăng hue để tạo hiệu ứng chuyển màu
+        textLabel.TextColor3 = Color3.fromHSV(hue / 360, 1, 1) -- Chuyển màu
+    end
+end
+
+-- Chạy hiệu ứng rainbow
+task.spawn(rainbowText)
+
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- 🖥️ Tạo ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+
+-- 🔤 Hàm tạo TextLabel
+local function createLabel(text, position)
+    local label = Instance.new("TextLabel")
+    label.Parent = screenGui
+    label.Size = UDim2.new(0.35, 0, 0.06, 0) -- Tăng kích thước một chút
+    label.Position = position
+    label.Text = text
+    label.TextScaled = true
+    label.Font = Enum.Font.SourceSansBold
+    label.BackgroundTransparency = 1
+    label.TextXAlignment = Enum.TextXAlignment.Left
+    return label
+end
+
+-- 🖼️ Hàm tạo Icon (Không có rainbow)
+local function createIcon(imageId, position)
+    local icon = Instance.new("ImageLabel")
+    icon.Parent = screenGui
+    icon.Size = UDim2.new(0.1, 0, 0.1, 0) -- Icon to hơn
+    icon.Position = position
+    icon.BackgroundTransparency = 1
+    icon.Image = "rbxassetid://129964146720519" .. imageId
+
+    -- Kiểm tra nếu icon không hiển thị
+    task.spawn(function()
+        wait(1)
+        if icon.Image == "" or icon.ImageRectSize == Vector2.new(0, 0) then
+            icon.Image = "rbxassetid://129964146720519" -- Icon dự phòng nếu ID không hợp lệ
+        end
+    end)
+
+    return icon
+end
+
+-- 🏗️ Tạo UI
+local dayIcon = createIcon("129964146720519", UDim2.new(0.01, 0, 0.02, 0)) -- Icon ngày chơi
+local daysLabel = createLabel("Ngày chơi: " .. player.AccountAge, UDim2.new(0.12, 0, 0.02, 0))
+local fpsLabel = createLabel("FPS: Đang đo...", UDim2.new(0.02, 0, 0.12, 0))
+local timeLabel = createLabel("Giờ: Đang lấy...", UDim2.new(0.02, 0, 0.22, 0))
+local PlayerLabel = createLabel("ID Tên Người Chơi: " .. game:GetService("Players").LocalPlayer.Name, UDim2.new(0.02, 0, 0.32, 0))
+
+-- 🎨 Rainbow toàn bộ chữ (trừ icon)
+task.spawn(function()
+    local hue = 0
+    while task.wait(0.1) do
+        hue = (hue + 10) % 360
+        local rainbowColor = Color3.fromHSV(hue / 360, 1, 1)
+
+        -- Chỉ đổi màu chữ, không đổi màu icon
+        for _, label in ipairs(screenGui:GetChildren()) do
+            if label:IsA("TextLabel") then
+                label.TextColor3 = rainbowColor
+            end
+        end
+    end
+end)
+
+-- ⏳ Cập nhật FPS & Giờ
+task.spawn(function()
+    while task.wait(1) do
+        local fps = math.floor(1 / game:GetService("RunService").RenderStepped:Wait())
+        fpsLabel.Text = "FPS: " .. fps
+    end
+end)
+task.spawn(function()
+    while task.wait(1) do
+        timeLabel.Text = "Giờ: " .. os.date("%H:%M:%S")
+    end
+end)
+
 shared.LoaderTitle = "WELCOME TO Vexalix";
 shared.LoaderKeyFrames = {
     [1] = {
@@ -265,38 +372,13 @@ local function getLocalTime(offset)
 end
 local label15 = Tab:CreateLabel("Vietnam Time: " .. getLocalTime(7))
 
-local Toggle = Tab:CreateToggle({
-   Name = "Screen UI",
-   CurrentValue = false,
-   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/android-/refs/heads/main/editcondimemay"))()
-   -- The function that takes place when the toggle is pressed
-   -- The variable (Value) is a boolean on whether the toggle is true or false
-   end,
-})
+
 
 
 local Button = Tab:CreateButton({
    Name = "Sound UI By: Vexalix25",
    Callback = function()
    loadstring(game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/Sound/refs/heads/main/Sound))()
-   -- The function that takes place when the button is pressed
-   end,
-})
-
-local Button = Tab:CreateButton({
-   Name = "Server list",
-   Callback = function()
-   loadstring(game:HttpGet("https://www.scriptblox.com/raw/Server-Browser_80", true))();
-   -- The function that takes place when the button is pressed
-   end,
-})
-
-local Button = Tab:CreateButton({
-   Name = "Hitbox+esp",
-   Callback = function()
-   loadstring(game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/Hitboxesp/refs/heads/main/.github/workflows/blank"))()
    -- The function that takes place when the button is pressed
    end,
 })
@@ -333,13 +415,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Truongthanhden23023/f
    end,
 })
 
-local Button = Tab:CreateButton({
-   Name = "Quay tay -(Hand Spinner)",
-   Callback = function()
-   -- The function that takes place when the button is pressed
-loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))("Spider Script")
-   end,
-})
+
 
 local Button = Tab:CreateButton({
    Name = "Simple Spy",
@@ -347,14 +423,6 @@ local Button = Tab:CreateButton({
    -- The function that takes place when the button is pressed
 local RemoteSpy = loadstring(game:HttpGet("https://raw.githubusercontent.com/exxtremestuffs/SimpleSpySource/master/SimpleSpy.lua"))()
 RemoteSpy:Start()
-   end,
-})
-
-local Button = Tab:CreateButton({
-   Name = "Premium DEX",
-   Callback = function()
-   -- The function that takes place when the button is pressed
-loadstring(game:HttpGet("https://raw.githubusercontent.com/pawslurr/Premium-Dex-V1/refs/heads/main/Dex%20Premium"))()
    end,
 })
 
